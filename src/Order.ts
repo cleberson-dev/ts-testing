@@ -61,6 +61,10 @@ export default class Order {
   get isFilled() {
     return this._isFilled;
   }
+
+  get totalAmount() {
+    return this._orderProducts.reduce((prev, acc) => prev + acc.amount, 0);
+  }
 }
 
 interface OrderProduct {
