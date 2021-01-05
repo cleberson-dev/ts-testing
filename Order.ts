@@ -9,28 +9,29 @@ export default class Order {
   }
 
   get products() {
-    return [...this._orderProducts];
+    return this._orderProducts.map(orderProduct => orderProduct.product);
   }
 
-  addProduct(orderProduct: OrderProduct) {
-    if (orderProduct.amount <= 0) throw Error('');
-    this._orderProducts.push(orderProduct);
+  addProduct(product: Product, amount: number) {
+    if (amount <= 0) throw Error('');
+    this._orderProducts.push({ product, amount });
   }
 
   info() {
     this._orderProducts.forEach(orderProduct => {
-      const { id, amount, price } = orderProduct;
+      const { id, price } = orderProduct.product;
+      const { amount } = orderProduct;
       console.log(`#${id} | ${amount} unidades | R$${price.toFixed(2)}`);
     });
+    console.log('Preço total: R$' + this.cost.toFixed(2));
   }
 
   get cost() {
-    return this._orderProducts.reduce((prev, acc) => prev + acc.price * acc.amount, 0);
+    return this._orderProducts.reduce((prev, acc) => prev + acc.product.price * acc.amount, 0);
   }
 }
 
 interface OrderProduct {
-  id: string;
+  product: Product;
   amount: number;
-  price: number;
 }
