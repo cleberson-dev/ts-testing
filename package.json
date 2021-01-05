@@ -4,7 +4,8 @@
   "description": "",
   "main": "src/app.ts",
   "scripts": {
-    "start": "ts-node ."
+    "start": "ts-node .",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +15,18 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.19",
     "@types/node": "^14.14.20",
     "@types/uuid": "^8.3.0",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.4.4",
     "ts-node": "^9.1.1"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": ["ts", "tsx", "js"]
   }
 }
