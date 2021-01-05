@@ -1,7 +1,9 @@
 import Product from "./Product"
+import Warehouse from "./Warehouse";
 
 export default class Order {
   private _orderProducts: OrderProduct[];
+  private _isFilled: boolean = false;
 
   constructor(orderProducts: OrderProduct[]) {
     if (orderProducts.some(product => product.amount <= 0)) throw Error('');
@@ -28,6 +30,17 @@ export default class Order {
 
   get cost() {
     return this._orderProducts.reduce((prev, acc) => prev + acc.product.price * acc.amount, 0);
+  }
+
+  fill(warehouse: Warehouse) {
+    this._orderProducts.forEach(orderProduct => {
+      warehouse.remove(orderProduct.product.id, orderProduct.amount);
+    });
+    this._isFilled = true;
+  }
+
+  get isFilled() {
+    return this._isFilled;
   }
 }
 
