@@ -41,6 +41,15 @@ export default class Warehouse {
     if (!product) throw Error('');
     return product.amount;
   }
+
+  hasInventory(productId: string, amount: number) {
+    if (amount <= 0) throw Error('');
+    
+    const product = this.findProduct(productId);
+    if (!product) return false;
+
+    return amount <= product.amount;
+  }
 }
 
 interface WarehouseProduct {

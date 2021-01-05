@@ -33,6 +33,11 @@ export default class Order {
   }
 
   fill(warehouse: Warehouse) {
+    // Precisa ter estoque para todo o pedido ter a retirada confirmada
+    if (this._orderProducts.some(op => !warehouse.hasInventory(op.product.id, op.amount))) {
+      throw Error('');
+    }
+    
     this._orderProducts.forEach(orderProduct => {
       warehouse.remove(orderProduct.product.id, orderProduct.amount);
     });
