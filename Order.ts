@@ -21,7 +21,7 @@ export default class Order {
     this._orderProducts.forEach(orderProduct => {
       const { id, price } = orderProduct.product;
       const { amount } = orderProduct;
-      console.log(`#${id} | ${amount} unidades | R$${price.toFixed(2)}`);
+      console.log(`#${id} | ${amount} unidades | R$${(price * amount).toFixed(2) }`);
     });
     console.log('Preço total: R$' + this.cost.toFixed(2));
   }
