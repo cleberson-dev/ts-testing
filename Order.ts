@@ -19,13 +19,18 @@ export default class Order {
 
   info() {
     this._orderProducts.forEach(orderProduct => {
-      const { id, amount } = orderProduct;
-      console.log(`#${id} | ${amount} unidades`);
+      const { id, amount, price } = orderProduct;
+      console.log(`#${id} | ${amount} unidades | R$${price.toFixed(2)}`);
     });
+  }
+
+  get cost() {
+    return this._orderProducts.reduce((prev, acc) => prev + acc.price * acc.amount, 0);
   }
 }
 
 interface OrderProduct {
   id: string;
-  amount: number; 
+  amount: number;
+  price: number;
 }
