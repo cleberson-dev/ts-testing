@@ -54,6 +54,10 @@ export default class Warehouse {
   get products() {
     return [...this._products];
   }
+
+  get totalAmount() {
+    return this._products.reduce((prev, acc) => prev + acc.amount, 0);
+  }
 }
 
 interface WarehouseProduct {
