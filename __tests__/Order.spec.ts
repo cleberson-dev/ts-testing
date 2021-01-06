@@ -81,3 +81,19 @@ it("should fill the order", () => {
 
   expect(order.isFilled).toEqual(true);
 });
+
+it("should fill the order only if it hasn't been", () => {
+  const myMockWarehouse = new WarehouseMock();
+  const orderProducts = [
+    { product: new ProductMock("Item 1", 10) as Product, amount: 1 },
+    { product: new ProductMock("Item 2", 20) as Product, amount: 2 },
+    { product: new ProductMock("Item 3", 30) as Product, amount: 1 },
+  ];
+  const order = new Order(orderProducts);
+
+  order.fill(myMockWarehouse as Warehouse);
+  mockHasInventory.mockClear();
+  order.fill(myMockWarehouse as Warehouse);
+
+  expect(mockHasInventory.mock.calls).toHaveLength(0);
+});
