@@ -125,3 +125,23 @@ it("should throw an error if warehouse doesn't have enough inventory", () => {
   }).toThrow();
   expect(order.isFilled).toEqual(false);
 });
+
+it("should NOT fill the order if can't remove some product from warehouse", () => {
+  const myMockWarehouse = new WarehouseMock();
+  mockHasInventory.mockImplementation((__, _) => true);
+  mockRemove.mockImplementation((__, _) => {
+    throw new Error("");
+  });
+
+  const orderProducts = [
+    { product: new ProductMock("Item 1", 10) as Product, amount: 1 },
+    { product: new ProductMock("Item 2", 20) as Product, amount: 2 },
+    { product: new ProductMock("Item 3", 30) as Product, amount: 2 },
+  ];
+  const order = new Order(orderProducts);
+  try {
+    order.fill(myMockWarehouse);
+  } catch (err) {}
+
+  expect(order.isFilled).toEqual(false);
+});
