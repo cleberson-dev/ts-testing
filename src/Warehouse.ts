@@ -1,5 +1,5 @@
 export default class Warehouse {
-  _products: WarehouseProduct[];
+  private _products: WarehouseProduct[];
 
   constructor(products: WarehouseProduct[]) {
     this._products = products;
@@ -49,6 +49,10 @@ export default class Warehouse {
     if (!product) return false;
 
     return amount <= product.amount;
+  }
+
+  get products() {
+    return [...this._products];
   }
 }
 
