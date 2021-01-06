@@ -2,13 +2,7 @@ import Order from "../src/Order";
 import Product from "../src/Product";
 import Warehouse from "../src/Warehouse";
 import WarehouseMock, { mockHasInventory, mockRemove } from "../__mocks__/Warehouse.mock";
-
-const ProductMock = jest.fn((name: string, price: number) => ({
-  name,
-  price,
-}));
-
-
+import ProductMock from '../__mocks__/Product.mock';
 
 it("should have 3 products", () => {
   const orderProducts = [
