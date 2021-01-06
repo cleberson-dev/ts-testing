@@ -43,6 +43,9 @@ export default class Order {
   }
 
   fill(warehouse: Warehouse) {
+    // Só é preciso realizar a retirada caso o pedido não for preenchido
+    if (this.isFilled) return;
+    
     // Precisa ter estoque para todo o pedido ter a retirada confirmada
     if (
       this._orderProducts.some(
