@@ -72,3 +72,15 @@ it("should remove 2 items", () => {
   const product = warehouse.findProduct("1237");
   expect(product?.amount).toEqual(1);
 });
+
+it("should throw an error if it attempts to remove 10 items from a 3-item product", () => {
+  const warehouse = new Warehouse([
+    { id: "1234", amount: 1 },
+    { id: "1235", amount: 1 },
+    { id: "1237", amount: 3 },
+  ]);
+
+  expect(() => {
+    warehouse.remove("1234", 10);
+  }).toThrow();
+});
