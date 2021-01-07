@@ -15,3 +15,9 @@ it("should generate unique ids", () => {
   expect(productB.id).toBeTruthy();
   expect(productA.id).not.toEqual(productB.id);
 });
+
+it("should set Other as default product category", () => {
+  const product = new Product("Item 1", 99.99);
+
+  expect(product.category).toEqual("Other");
+});
