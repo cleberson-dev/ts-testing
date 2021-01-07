@@ -119,3 +119,13 @@ it("should return false if it doesnt have 4 of inventory", () => {
 
   expect(warehouse.hasInventory("1237", 4)).toEqual(false);
 });
+
+it("should return the correct amount for a product", () => {
+  const warehouse = new Warehouse([
+    { id: "1234", amount: 1 },
+    { id: "1235", amount: 1 },
+    { id: "1237", amount: 3 },
+  ]);
+
+  expect(warehouse.getAmount("1234")).toEqual(1);
+});
