@@ -59,3 +59,16 @@ it("should add a new product to warehouse", () => {
   expect(product?.id).toEqual("randomId");
   expect(product?.amount).toEqual(3);
 });
+
+it("should remove 2 items", () => {
+  const warehouse = new Warehouse([
+    { id: "1234", amount: 1 },
+    { id: "1235", amount: 1 },
+    { id: "1237", amount: 3 },
+  ]);
+
+  warehouse.remove("1237", 2);
+
+  const product = warehouse.findProduct("1237");
+  expect(product?.amount).toEqual(1);
+});
