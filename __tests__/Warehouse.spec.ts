@@ -84,3 +84,18 @@ it("should throw an error if it attempts to remove 10 items from a 3-item produc
     warehouse.remove("1234", 10);
   }).toThrow();
 });
+
+it("should throw an error if amount requested to remove is negative or zero", () => {
+  const warehouse = new Warehouse([
+    { id: "1234", amount: 1 },
+    { id: "1235", amount: 1 },
+    { id: "1237", amount: 3 },
+  ]);
+
+  expect(() => {
+    warehouse.remove("1234", -1);
+  }).toThrow();
+  expect(() => {
+    warehouse.remove("1234", 0);
+  }).toThrow();
+});
