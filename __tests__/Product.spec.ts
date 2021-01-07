@@ -21,3 +21,13 @@ it("should set Other as default product category", () => {
 
   expect(product.category).toEqual("Other");
 });
+
+it("should fail if it tries to set a negative price", () => {
+  expect(() => {
+    new Product("Item 1", -10);
+  }).toThrow();
+  expect(() => {
+    const product = new Product("Item 1", 9.99);
+    product.price = -10;
+  }).toThrow();
+});
