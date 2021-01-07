@@ -31,7 +31,7 @@ it("should find an existing product", () => {
   expect(product?.amount).toEqual(1);
 });
 
-it("should find a undefined product", () => {
+it("should find an undefined product", () => {
   const warehouse = new Warehouse([
     { id: "1234", amount: 1 },
     { id: "1235", amount: 1 },
@@ -41,4 +41,21 @@ it("should find a undefined product", () => {
   const product = warehouse.findProduct("notExistedId");
 
   expect(product).toBeUndefined();
+});
+
+it("should add a new product to warehouse", () => {
+  const warehouse = new Warehouse([
+    { id: "1234", amount: 1 },
+    { id: "1235", amount: 1 },
+    { id: "1237", amount: 3 },
+  ]);
+
+  const oldLength = warehouse.products.length;
+  warehouse.add("randomId", 3);
+  const newLength = warehouse.products.length;
+  const product = warehouse.findProduct("randomId");
+
+  expect(newLength - oldLength).toEqual(1);
+  expect(product?.id).toEqual("randomId");
+  expect(product?.amount).toEqual(3);
 });
