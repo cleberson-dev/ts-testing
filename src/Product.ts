@@ -12,6 +12,8 @@ export default class Product {
     price: number,
     category: ProductCategories = ProductCategories.Other
   ) {
+    if (price < 0) throw Error("");
+
     this._id = uuid();
     this.name = name;
     this._price = price;
@@ -28,7 +30,7 @@ export default class Product {
 
   set price(newPrice: number) {
     if (newPrice < 0) throw Error("");
-    this.price = newPrice;
+    this._price = newPrice;
   }
 
   get formattedPrice() {
