@@ -99,3 +99,13 @@ it("should throw an error if amount requested to remove is negative or zero", ()
     warehouse.remove("1234", 0);
   }).toThrow();
 });
+
+it("should have inventory of 3 for a product with 3 items", () => {
+  const warehouse = new Warehouse([
+    { id: "1234", amount: 1 },
+    { id: "1235", amount: 1 },
+    { id: "1237", amount: 3 },
+  ]);
+
+  expect(warehouse.hasInventory("1237", 3)).toEqual(true);
+});
