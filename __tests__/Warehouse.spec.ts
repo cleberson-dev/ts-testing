@@ -18,7 +18,7 @@ it("should have a total of 5 items", () => {
   expect(warehouse.totalAmount).toEqual(5);
 });
 
-it("should find a existing product", () => {
+it("should find an existing product", () => {
   const warehouse = new Warehouse([
     { id: "1234", amount: 1 },
     { id: "1235", amount: 1 },
@@ -29,4 +29,16 @@ it("should find a existing product", () => {
 
   expect(product?.id).toEqual("1234");
   expect(product?.amount).toEqual(1);
+});
+
+it("should find a undefined product", () => {
+  const warehouse = new Warehouse([
+    { id: "1234", amount: 1 },
+    { id: "1235", amount: 1 },
+    { id: "1237", amount: 3 },
+  ]);
+
+  const product = warehouse.findProduct("notExistedId");
+
+  expect(product).toBeUndefined();
 });
